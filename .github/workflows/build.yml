@@ -3,7 +3,7 @@ on:
       branches:
         - testing
   
-jobs:
+  jobs:
     build:
       runs-on: ubuntu-latest
       steps:
@@ -20,17 +20,10 @@ jobs:
             python -m pip install --upgrade pip
             pip install -r requirements.txt
   
-        - name: Build project
+        - name: Run the application (optional)
           run: |
-            python app.py sdist bdist_wheel
-            mkdir -p build_output
-            cp -r dist/* build_output/
+            python app.py
   
-        - name: Upload build artifacts
-          uses: actions/upload-artifact@v3
-          with:
-            name: build-artifacts
-            path: build_output/
-            
         - name: Output build information
-          run: echo "Build and upload complete"
+          run: echo "Build complete"
+  
