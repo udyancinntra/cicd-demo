@@ -1,7 +1,7 @@
 on:
     push:
       branches:
-        - main
+        - testing
   
 jobs:
     test:
@@ -47,6 +47,18 @@ jobs:
         - name: Run the application with Gunicorn
           run: |
             gunicorn --bind 0.0.0.0:8080 app:app &
+
+
+        - name: Prepare build artifacts
+          run: |
+              mkdir -p build_output
+              cp -r app.py build_output/  
+        - name: Upload build artifacts
+          uses: actions/upload-artifact@v3
+          with:
+              name: build-artifacts
+              path: build_output/
+
         - name: Output build information
           run: echo "Build complete"
   
