@@ -28,10 +28,23 @@ jobs:
         - name: Run the application with Gunicorn
           run: |
             gunicorn --bind 0.0.0.0:8080 app:app &
-            
-        
   
-        # Step 6: Output build information (optional)
+        # Step 6: Create a build directory and copy artifacts
+        - name: Prepare build artifacts
+          run: |
+            mkdir -p build_output
+            # Copy any logs, outputs, or static files needed as artifacts
+            cp -r app.py build_output/  # Example, copy app.py to build output
+            # If you have logs or static files, add them here
+  
+        # Step 7: Upload artifacts (build output)
+        - name: Upload build artifacts
+          uses: actions/upload-artifact@v3
+          with:
+            name: build-artifacts
+            path: build_output/
+  
+        # Step 8: Output build information (optional)
         - name: Output build information
-          run: echo "Build complete"
+          run: echo "Build complete and artifacts uploaded."
   
