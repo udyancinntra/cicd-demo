@@ -7,7 +7,7 @@ jobs:
       environment: testing
       runs-on: ubuntu-latest
       steps:
-        - name: Set up Python 3.9  # Updated to Python 3.9
+        - name: Set up Python 3.9  # Updated to Python 3.9 to 3.10
           uses: actions/setup-python@v4
           with:
             python-version: '3.9'
